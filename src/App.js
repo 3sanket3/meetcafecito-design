@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.png";
 
 import "./App.css";
 import styled from "styled-components";
-import { FaVolumeUp, FaShareSquare, FaVideo } from "react-icons/fa";
+import { FaVolumeUp, FaShareSquare, FaVideo, FaCommentDots } from "react-icons/fa";
 
 const Layout = styled.div`
   padding: 0 5%;
@@ -26,7 +26,9 @@ const CallContainer = styled.div`
   border-radius: 5px;
 `;
 
-const VideoScreensContainer = styled.div``;
+const VideoScreensContainer = styled.div`
+  position: relative;
+`;
 const VideoTileContainer = styled.div`
   display: grid;
   grid-template-columns: 30% 30%;
@@ -37,6 +39,8 @@ const VideoTileContainer = styled.div`
 
 const AgendaContainer = styled.div`
   border-left: 8px solid #f8f5f5;
+  text-align: center;
+  position: relative;
 `;
 
 const Video = styled.div`
@@ -50,7 +54,8 @@ const ControlWrapper = styled.div`
   width: 100%;
   display: flex;
   height: 60px;
-  background: #000;
+  background: #000000bd;
+  border-radius: 5px;
 `;
 const Control = styled.div`
   display: flex;
@@ -61,12 +66,42 @@ const Control = styled.div`
   margin: 5px;
   color: #fff;
   border-radius: 5px;
+  cursor: pointer;
   :hover {
     background: #ccc;
   }
 `;
 
+const EndMeetingButton = styled.div`
+  height: 60px;
+  background: #382093;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+`;
+
+const ChatButton = styled.div`
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  border-radius: 50%;
+  color: #fff;
+  background: #382093;
+  cursor: pointer;
+`;
 function App() {
+  const [isChatEnabled, setChatEnabled] = useState();
   return (
     <Layout>
       <Header>
@@ -94,8 +129,23 @@ function App() {
               <FaShareSquare />
             </Control>
           </ControlWrapper>
+          <ChatButton onClick={() => setChatEnabled(!isChatEnabled)}>
+            <FaCommentDots></FaCommentDots>
+          </ChatButton>
         </VideoScreensContainer>
-        <AgendaContainer></AgendaContainer>
+        <AgendaContainer>
+          {isChatEnabled ? (
+            <h3> Chatbox will open here</h3>
+          ) : (
+            <>
+              <h3>Cafecito break 4/16</h3>
+              <h3>Agenda</h3>
+              <EndMeetingButton>
+                <span>End meeting and leave feedback</span>
+              </EndMeetingButton>
+            </>
+          )}
+        </AgendaContainer>
       </CallContainer>
     </Layout>
   );
