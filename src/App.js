@@ -24,10 +24,15 @@ const CallContainer = styled.div`
   border: 8px solid #f8f5f5;
   box-sizing: border-box;
   border-radius: 5px;
+  min-height: 70vh;
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const VideoScreensContainer = styled.div`
   position: relative;
+  padding-bottom: 60px;
 `;
 const VideoTileContainer = styled.div`
   display: grid;
@@ -35,6 +40,10 @@ const VideoTileContainer = styled.div`
   grid-gap: 10px;
   justify-content: center;
   margin: 15px;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 80%;
+  }
 `;
 
 const AgendaContainer = styled.div`
@@ -56,6 +65,8 @@ const ControlWrapper = styled.div`
   height: 60px;
   background: #000000bd;
   border-radius: 5px;
+  position: absolute;
+  bottom: 0;
 `;
 const Control = styled.div`
   display: flex;
@@ -100,6 +111,7 @@ const ChatButton = styled.div`
   background: #382093;
   cursor: pointer;
 `;
+
 function App() {
   const [isChatEnabled, setChatEnabled] = useState();
   return (
@@ -135,7 +147,7 @@ function App() {
         </VideoScreensContainer>
         <AgendaContainer>
           {isChatEnabled ? (
-            <h3> Chatbox will open here</h3>
+            <h3> This will be checkbox</h3>
           ) : (
             <>
               <h3>Cafecito break 4/16</h3>
